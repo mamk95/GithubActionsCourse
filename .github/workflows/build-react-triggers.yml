@@ -1,0 +1,45 @@
+name: Build and test react-app (with triggers)
+
+on:
+  issues:
+    types:
+      - opened
+
+  # A push is made to the main branch   
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'react-app/**'
+
+  # A pull request that targets main branch or anything starting with "releases/"
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+    paths:
+      - 'react-app/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        
+    - run: npm install
+      working-directory: ./react-app
+    
+    - run: npm run build
+      working-directory: ./react-app
+    
+    - run: npm test
+      working-directory: ./react-app

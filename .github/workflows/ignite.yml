@@ -1,0 +1,11 @@
+name: Ignite
+
+on:
+  workflow_dispatch:
+
+jobs:
+  jobb123:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Si hei
+      run: echo "Hello, World!"

@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '24.x'
 
-      - run: npm ci
+      - run: cd app && npm ci
+      
       - run: npm run build
-      - run: npm test
+        working-directory: app
+        
+      - run: cd app && npm test
